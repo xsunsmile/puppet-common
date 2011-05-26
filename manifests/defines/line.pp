@@ -27,7 +27,7 @@ define line($file, $line, $ensure = 'present') {
   case $ensure {
     default : { err ( "unknown ensure value '${ensure}'" ) }
     present: {
-      exec { "echo '${line}' >> '${file}'":
+      exec { "sed -i '1i${line}' '${file}'":
         unless => "grep -qFx '${line}' '${file}'"
       }
     }
