@@ -5,6 +5,8 @@ require 'rubygems'
 
 module Puppet::Parser::Functions
 	newfunction(:gem_path, :type => :rvalue) do |args|
-		return Gem.path.join(':')
+		result = ''
+		Gem.path.each {|it| result += "#{it}/bin:" }
+		return result.sub(/:$/,'')
 	end
 end
