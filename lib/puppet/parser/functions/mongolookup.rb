@@ -11,7 +11,7 @@ module Puppet::Parser::Functions
 		match_exp = /mongodb:\/\/(\d+.\d+.\d+.\d+):?(\d+)?\/(\w+)\/(\w+)\/(\w+)\/(\w+)/
 		mongodb_host, port, hosts_db, collection_name, hostname, prop = \
 			$1,$2,$3,$4,$5,$6 if args[0] =~ /#{match_exp}/
-		conn = Mongo::Connection.new(mongo_host)
+		conn = Mongo::Connection.new(mongodb_host)
 		db = conn.db(hosts_db)
 		hosts_coll = db.collection(collection_name)
 		host_info = hosts_coll.find_one("name" => hostname)
